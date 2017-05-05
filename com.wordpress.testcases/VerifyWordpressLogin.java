@@ -1,32 +1,33 @@
-package com.wordpress.Pages;
+package com.wordpress.Testcases;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.Test;
 
-public class LoginPage {
-	
-	WebDriver driver;
-	
-	By username = By.id("user_login");
-	By password = By.id("user_pass");
-	By loginButton = By.id("wp-submit");
-	
-	public LoginPage(WebDriver driver){
-		this.driver = driver;
-	}
-	
-	public void typeUserName()
+import com.wordpress.Pages.LoginPage;
+
+public class VerifyWordpressLogin 
+{
+	@Test
+	public void verifyValidLogin()
 	{
-		driver.findElement(username).sendKeys("admin");
+		
+		
+		
+		WebDriver driver = new ChromeDriver();
+		driver.manage().window().maximize();
+		driver.get("http://demosite.center/wordpress/wp-login.php");
+		
+		LoginPage login = new LoginPage(driver);
+		login.typeUserName();
+		
+		login.typePassword();
+		
+		login.clickOnLoginButton();
+		
+		driver.quit();
+		
 	}
+		
 	
-	public void typePassword()
-	{
-		driver.findElement(password).sendKeys("demo123");
-	}
-	
-	public void clickOnLoginButton()
-	{
-		driver.findElement(loginButton).click();
-	}
 }
